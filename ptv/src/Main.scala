@@ -20,22 +20,22 @@ import pureconfig.ConfigSource
 import pureconfig.generic.auto._
 
 object Main extends IOApp {
-  def getDevice(tunerCount: Int, host: String) = Device(
+  def getDevice(config: ServiceConf) = Device(
     "PseudoTVScala",
     "PseudoTV - Silicondust",
-    s"https://$host/ptv",
+    "https://github.com/jasongdove/ptv",
     "HDTC-2US",
     "hdhomeruntc_atsc",
     "20190621",
-    tunerCount,
+    config.tunerCount,
     "PseudoTVScala",
     "",
-    host,
-    s"http://$host/lineup.json"
+    config.host,
+    s"http://${config.host}:${config.port}/lineup.json"
   )
 
-  def getChannels(host: String) = List(
-    Channel(1, "Test Channel 1", s"http://$host/video?channel=1")
+  def getChannels(config: ServiceConf) = List(
+    Channel(1, "Test Channel 1", s"http://${config.host}:${config.port}/auto/v1")
   )
 
   val lineupStatus = LineupStatus(0, 1, "Cable", List("Cable"))
@@ -86,8 +86,8 @@ object Main extends IOApp {
 
     val blocker = Blocker[IO]
 
-    val device = getDevice(config.tunerCount, config.host)
-    val channels = getChannels(config.host)
+    val device = getDevice(config)
+    val channels = getChannels(config)
 
     blocker.use(b =>
       BlazeServerBuilder[IO](global)

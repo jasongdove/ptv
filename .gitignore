@@ -7,8 +7,4 @@ output/
 out/
 /.bloop/
 /.metals/
-mill.iml
-.bsp/
-bsp.log
-lowered.hnir
-.dotty-ide*
+/.coursier/
