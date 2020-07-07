@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tv source_info_url="https://github.com/jasongdove/ptv">
+  <channel id="I1.jasongdove.ptv">
+    <display-name>Test Channel 1</display-name>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png" />
+    <lcn>1</lcn>
+  </channel>
+  <programme start="20200706160000" stop="20200706170000" channel="I1.jasongdove.ptv">
+    <title lang="en">Test Program</title>
+    <previously-shown/>
+    <sub-title lang="en">Test program subtitle</sub-title>
+    <desc lang="en">Test program description</desc>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png"/>
+    <episode-num system="xmltv_ns">19.3.</episode-num>
+    <rating system="MPAA">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+  <programme start="20200706170000" stop="20200706180000" channel="I1.jasongdove.ptv">
+    <title lang="en">Test Program</title>
+    <previously-shown/>
+    <sub-title lang="en">Test program subtitle</sub-title>
+    <desc lang="en">Test program description</desc>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png"/>
+    <episode-num system="xmltv_ns">19.3.</episode-num>
+    <rating system="MPAA">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+  <programme start="20200706180000" stop="20200706190000" channel="I1.jasongdove.ptv">
+    <title lang="en">Test Program</title>
+    <previously-shown/>
+    <sub-title lang="en">Test program subtitle</sub-title>
+    <desc lang="en">Test program description</desc>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png"/>
+    <episode-num system="xmltv_ns">19.3.</episode-num>
+    <rating system="MPAA">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+  <programme start="20200706190000" stop="20200706200000" channel="I1.jasongdove.ptv">
+    <title lang="en">Test Program</title>
+    <previously-shown/>
+    <sub-title lang="en">Test program subtitle</sub-title>
+    <desc lang="en">Test program description</desc>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png"/>
+    <episode-num system="xmltv_ns">19.3.</episode-num>
+    <rating system="MPAA">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+  <programme start="20200706200000" stop="20200706210000" channel="I1.jasongdove.ptv">
+    <title lang="en">Test Program</title>
+    <previously-shown/>
+    <sub-title lang="en">Test program subtitle</sub-title>
+    <desc lang="en">Test program description</desc>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png"/>
+    <episode-num system="xmltv_ns">19.3.</episode-num>
+    <rating system="MPAA">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+  <programme start="20200706210000" stop="20200706220000" channel="I1.jasongdove.ptv">
+    <title lang="en">Test Program</title>
+    <previously-shown/>
+    <sub-title lang="en">Test program subtitle</sub-title>
+    <desc lang="en">Test program description</desc>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png"/>
+    <episode-num system="xmltv_ns">19.3.</episode-num>
+    <rating system="MPAA">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+  <programme start="20200706220000" stop="20200706230000" channel="I1.jasongdove.ptv">
+    <title lang="en">Test Program</title>
+    <previously-shown/>
+    <sub-title lang="en">Test program subtitle</sub-title>
+    <desc lang="en">Test program description</desc>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png"/>
+    <episode-num system="xmltv_ns">19.3.</episode-num>
+    <rating system="MPAA">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+  <programme start="20200706230000" stop="20200707000000" channel="I1.jasongdove.ptv">
+    <title lang="en">Test Program</title>
+    <previously-shown/>
+    <sub-title lang="en">Test program subtitle</sub-title>
+    <desc lang="en">Test program description</desc>
+    <icon src="https://raw.githubusercontent.com/DEFENDORe/pseudotv/master/resources/pseudotv.png"/>
+    <episode-num system="xmltv_ns">19.3.</episode-num>
+    <rating system="MPAA">
+      <value>TV-G</value>
+    </rating>
+  </programme>
+</tv>

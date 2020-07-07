@@ -20,7 +20,7 @@ import pureconfig.ConfigSource
 import pureconfig.generic.auto._
 
 object Main extends IOApp {
-  def getDevice(config: ServiceConf) = Device(
+  def getDevice(config: Config) = Device(
     "PseudoTVScala",
     "PseudoTV - Silicondust",
     "https://github.com/jasongdove/ptv",
@@ -34,13 +34,22 @@ object Main extends IOApp {
     s"http://${config.host}:${config.port}/lineup.json"
   )
 
-  def getChannels(config: ServiceConf) = List(
-    Channel(1, "Test Channel 1", s"http://${config.host}:${config.port}/auto/v1")
+  def getChannels(config: Config) = List(
+    Channel(
+      1,
+      "Test Channel 1",
+      s"http://${config.host}:${config.port}/auto/v1"
+    )
   )
 
   val lineupStatus = LineupStatus(0, 1, "Cable", List("Cable"))
 
-  def app(blocker: Blocker, device: Device, channels: List[Channel], testFile: String) =
+  def app(
+      blocker: Blocker,
+      device: Device,
+      channels: List[Channel],
+      testFile: String
+  ) =
     HttpRoutes
       .of[IO] {
         case GET -> Root / "discover.json" =>
@@ -49,6 +58,10 @@ object Main extends IOApp {
           Ok(lineupStatus.asJson)
         case GET -> Root / "lineup.json" =>
           Ok(channels.asJson)
+        case request @ GET -> Root / "xmltv.xml" =>
+          StaticFile
+            .fromResource("/xmltv.xml", blocker, Some(request))
+            .getOrElseF(NotFound())
         case GET -> Root / "auto" / channel => {
           val ffmpeg = os
             .proc(
@@ -82,22 +95,26 @@ object Main extends IOApp {
       .orNotFound
 
   def run(args: List[String]): IO[ExitCode] = {
-    val config = ConfigSource.default.loadOrThrow[ServiceConf]
+    val config = ConfigSource.default.loadOrThrow[Config]
 
     val blocker = Blocker[IO]
 
     val device = getDevice(config)
     val channels = getChannels(config)
 
-    blocker.use(b =>
-      BlazeServerBuilder[IO](global)
-        .bindHttp(config.port, config.host)
-        .withHttpApp(
-          RequestLogger(false, false, FunctionK.id[IO])(app(b, device, channels, config.testFile))
-        )
-        .serve
-        .compile
-        .drain
-    ).as(ExitCode.Success)
+    blocker
+      .use(b =>
+        BlazeServerBuilder[IO](global)
+          .bindHttp(config.port, config.host)
+          .withHttpApp(
+            RequestLogger(false, false, FunctionK.id[IO])(
+              app(b, device, channels, config.testFile)
+            )
+          )
+          .serve
+          .compile
+          .drain
+      )
+      .as(ExitCode.Success)
   }
 }
