@@ -15,22 +15,14 @@ object Main extends IOApp {
     config: PtvConfig
   ): HttpApp[IO] = (HDHR(config, blocker) <+> XMLTV(blocker)).orNotFound
 
-  override def run(args: List[String]): IO[ExitCode] = {
-    val config = ConfigSource.default.loadOrThrow[PtvConfig]
+  override def run(args: List[String]): IO[ExitCode] = resources.use(_ => IO.never)
 
-    Blocker[IO]
-      .use(blocker =>
-        BlazeServerBuilder[IO](global)
-          .bindHttp(config.port, config.host)
-          .withHttpApp(
-            RequestLogger(logHeaders = false, logBody = false, FunctionK.id[IO])(
-              app(blocker, config)
-            )
-          )
-          .serve
-          .compile
-          .drain
-      )
-      .as(ExitCode.Success)
-  }
+  def resources =
+    for {
+      blocker <- Blocker[IO]
+      config = ConfigSource.default.loadOrThrow[PtvConfig]
+      loggerApp = RequestLogger(logHeaders = false, logBody = false, FunctionK.id[IO])(app(blocker, config))
+      server <- BlazeServerBuilder[IO](global).withHttpApp(loggerApp).bindHttp(config.port, config.host).resource
+    } yield ExitCode.Success
+
 }
